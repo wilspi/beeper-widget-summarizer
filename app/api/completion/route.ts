@@ -22,11 +22,12 @@ export async function POST(req: Request) {
         method: 'POST',
         headers: headers,
         body: JSON.stringify({
-            prompt: `Human: ${prompt}\n\nAssistant:`,
-            model: 'claude-v1',
+            model: "claude-3-opus-20240229",
+            max_tokens: 000,
             max_tokens_to_sample: 3000,
-            temperature: 0.9,
-            stream: true
+            temperature: 0,
+            prompt: `Human: ${prompt}\n\nAssistant:`,
+            stream: true,
         })
     })
 
