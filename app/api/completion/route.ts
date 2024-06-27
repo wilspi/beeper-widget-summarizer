@@ -23,15 +23,15 @@ export async function POST(req: Request) {
         headers: headers,
         body: JSON.stringify({
             model: "claude-3-opus-20240229",
-            max_tokens: 000,
+            max_tokens: 3000,
             max_tokens_to_sample: 3000,
             temperature: 0,
             prompt: `Human: ${prompt}\n\nAssistant:`,
-            stream: true,
+            stream: true
         })
     })
 
-    console.log('Response from AI', response);
+    console.log('Response from AI', response)
 
     // Convert the response into a friendly text-stream
     const stream = AnthropicStream(response)
