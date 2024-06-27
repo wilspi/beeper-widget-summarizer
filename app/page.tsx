@@ -5,8 +5,6 @@ import { MuiCapabilitiesGuard } from "@beeper/matrix-widget-toolkit-mui";
 import Content from "@/app/content";
 
 export default function Home() {
-
-
     return (
         <>
             <MuiCapabilitiesGuard

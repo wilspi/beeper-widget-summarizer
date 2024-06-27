@@ -1,4 +1,7 @@
-import { AnthropicStream, StreamingTextResponse } from 'ai'
+import { AnthropicStream, OpenAIStream, StreamingTextResponse } from 'ai'
+import OpenAI from 'openai';
+
+const openai = new OpenAI();
 
 // IMPORTANT! Set the runtime to edge
 export const runtime = 'edge'
@@ -8,33 +11,21 @@ export async function POST(req: Request) {
     const { prompt } = await req.json()
 
 
-    const apiKey = process.env.ANTHROPIC_API_KEY;
+    const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
-        throw new Error('ANTHROPIC_API_KEY is not defined');
+        throw new Error('OPEN_API_KEY is not defined');
     }
 
-    const headers: HeadersInit = {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey
-    }
 
-    const response = await fetch('https://api.anthropic.com/v1/complete', {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify({
-            model: "claude-3-opus-20240229",
-            max_tokens: 3000,
-            max_tokens_to_sample: 3000,
-            temperature: 0,
-            prompt: `Human: ${prompt}\n\nAssistant:`,
-            stream: true
-        })
-    })
+    const response = await openai.chat.completions.create({
+        model: 'gpt-4',
+        messages: [{ role: 'user', content: `Human: ${prompt}\n\nAssistant:` }],
+        stream: true,
+    }).asResponse();
 
-    console.log('Response from AI', response)
 
     // Convert the response into a friendly text-stream
-    const stream = AnthropicStream(response)
+    const stream = OpenAIStream(response)
 
     // Respond with the stream
     return new StreamingTextResponse(stream)
