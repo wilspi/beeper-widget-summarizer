@@ -31,6 +31,8 @@ export async function POST(req: Request) {
         })
     })
 
+    console.log('Response from AI', response);
+
     // Convert the response into a friendly text-stream
     const stream = AnthropicStream(response)
 
