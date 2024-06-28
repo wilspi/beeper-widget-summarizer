@@ -29,12 +29,10 @@ export default function Content() {
     const { complete, completion } = useCompletion({
         api: '/api/completion',
         onResponse: (response) => {
-            console.log('response', response);
             setLoading(false);
             setSummarizing(true);
         },
         onError: (error) => {
-            console.log('errorrr');
             setError(error.message);
         }
     })
@@ -84,9 +82,9 @@ export default function Content() {
         <div className="mt-5 p-3">
             { noMessages && (
                 <>
-                    <p className="font-medium font-sans text-gray-600">No new messages.</p>
+                    <p className="font-medium font-sans text-gray-300">No new messages.</p>
                     <p className="font-bold font-sans text-xl mt-1">Summarize recent messages?</p>
-                    <input className="block border-2 border-gray-200 px-2 py-2 w-20 mt-4 rounded-lg focus:ring focus:outline-none ring-gray-300 text-black" type="number" step="1" min="1" max="1000" onChange={(e) => setCount(parseInt(e.target.value))} value={count}/>
+                    <input className="block border-2 border-gray-200 px-2 py-2 w-20 mt-4 rounded-lg focus:ring focus:outline-none ring-gray-300 text-white bg-transparent" type="number" step="1" min="1" max="1000" onChange={(e) => setCount(parseInt(e.target.value))} value={count}/>
                     <button className="block rounded-lg px-10 py-3 text-center bg-black text-white mt-6 transition duration-300 hover:bg-gray-800" onClick={() => summarize(false, count)}>Summarize</button>
                 </>
             )}
