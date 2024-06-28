@@ -16,13 +16,11 @@ export async function POST(req: Request) {
         throw new Error('OPEN_API_KEY is not defined');
     }
 
-
     const response = await openai.chat.completions.create({
-        model: 'gpt-4',
+        model: 'gpt-3.5-turbo',
         messages: [{ role: 'user', content: `Human: ${prompt}\n\nAssistant:` }],
         stream: true,
     }).asResponse();
-
 
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response)
