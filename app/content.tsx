@@ -5,9 +5,9 @@ import {RoomAccountData, RoomEvent} from "@beeper/matrix-widget-toolkit-api";
 import {getDisplayNameData, Message, processMessages, RoomMessageEvent} from "@/app/helpers";
 
 function generatePrompt(messages: Message[], displayNameData: Record<string, string>) {
-    const start_prompt = "Voici la transcription d'un chat avec mes amis:"
+    const start_prompt = "Here is a transcript of a chat:"
 
-    const end_prompt = "Give a bullet-point summary that is detailed, thorough, and that accurately captures the conversation. Include names only to tell me who's backing up a claim or assertion. After reading your summary, my understanding of what happened should be as good as if I had read the messages myself. Give me details and specifics. Use active voice throughout. Only include links that would be genuinely useful for me to have. Write only the summary, without including text like \"Here\'s the summary\" or \"I hope this helped\". Be short, concise, and to the point. Reduce useless informations if possible. Say it in french."
+    const end_prompt = "Give a bullet-point summary that is detailed, thorough, and that accurately captures the conversation. Include names only to tell me who's backing up a claim or assertion. After reading your summary, my understanding of what happened should be as good as if I had read the messages myself. Give me details and specifics. Use active voice throughout. Only include links that would be genuinely useful for me to have. Write only the summary, without including text like \"Here\'s the summary\" or \"I hope this helped\". Be short, concise, and to the point. Reduce useless informations if possible."
     let messages_prompt = "";
 
     messages.forEach((message) => {
