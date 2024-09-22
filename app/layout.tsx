@@ -29,7 +29,7 @@ export default function RootLayout({
 
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={inter.className} style={{ backgroundColor: '#25262d', color: '#fff'}}>
                 <MuiThemeProvider>
                     <MuiWidgetApiProvider widgetApiPromise={widgetApiPromise}>
                         {children}
