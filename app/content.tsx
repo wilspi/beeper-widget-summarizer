@@ -5,9 +5,9 @@ import {RoomAccountData, RoomEvent} from "@beeper/matrix-widget-toolkit-api";
 import {getDisplayNameData, Message, processMessages, RoomMessageEvent} from "@/app/helpers";
 
 function generatePrompt(messages: Message[], displayNameData: Record<string, string>) {
-    const start_prompt = "Here is a transcript of a chat:"
+    const start_prompt = "Voici la transcription d'un chat avec mes amis:"
 
-    const end_prompt = "Give a bullet-point summary that is detailed, thorough, and that accurately captures the conversation. Include names only to tell me who's backing up a claim or assertion. After reading your summary, my understanding of what happened should be as good as if I had read the messages myself. Give me details and specifics. Use active voice throughout. Only include links that would be genuinely useful for me to have. Write only the summary, without including text like \"Here\'s the summary\" or \"I hope this helped\""
+    const end_prompt = "Give a bullet-point summary that is detailed, thorough, and that accurately captures the conversation. Include names only to tell me who's backing up a claim or assertion. After reading your summary, my understanding of what happened should be as good as if I had read the messages myself. Give me details and specifics. Use active voice throughout. Only include links that would be genuinely useful for me to have. Write only the summary, without including text like \"Here\'s the summary\" or \"I hope this helped\". Be short, concise, and to the point. Reduce useless informations if possible. Say it in french."
     let messages_prompt = "";
 
     messages.forEach((message) => {
@@ -28,7 +28,7 @@ export default function Content() {
 
     const { complete, completion } = useCompletion({
         api: '/api/completion',
-        onResponse: () => {
+        onResponse: (response) => {
             setLoading(false);
             setSummarizing(true);
         },
@@ -82,9 +82,9 @@ export default function Content() {
         <div className="mt-5 p-3">
             { noMessages && (
                 <>
-                    <p className="font-medium font-sans text-gray-600">No new messages.</p>
+                    <p className="font-medium font-sans text-gray-300">No new messages.</p>
                     <p className="font-bold font-sans text-xl mt-1">Summarize recent messages?</p>
-                    <input className="block border-2 border-gray-200 px-2 py-2 w-20 mt-4 rounded-lg focus:ring focus:outline-none ring-gray-300 text-black" type="number" step="1" min="1" max="1000" onChange={(e) => setCount(parseInt(e.target.value))} value={count}/>
+                    <input className="block border-2 border-gray-200 px-2 py-2 w-20 mt-4 rounded-lg focus:ring focus:outline-none ring-gray-300 text-white bg-transparent" type="number" step="1" min="1" max="1000" onChange={(e) => setCount(parseInt(e.target.value))} value={count}/>
                     <button className="block rounded-lg px-10 py-3 text-center bg-black text-white mt-6 transition duration-300 hover:bg-gray-800" onClick={() => summarize(false, count)}>Summarize</button>
                 </>
             )}
